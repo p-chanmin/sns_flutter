@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sns_flutter/src/screen/feed/feed_show.dart';
 import 'package:sns_flutter/src/widget/my_profile.dart';
 
+import '../model/feed_model.dart';
+
 class FeedItem extends StatelessWidget {
-  const FeedItem({super.key});
+  final FeedModel feed;
+  const FeedItem(this.feed, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class FeedItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const FeedShow()),
+          MaterialPageRoute(builder: (context) => FeedShow(feed)),
         );
       },
       child: Container(
@@ -25,9 +28,9 @@ class FeedItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Text(
-                        '홍길동',
+                        '${feed.name}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -37,7 +40,7 @@ class FeedItem extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        '2023-01-19',
+                        '${feed.createAt}',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -46,8 +49,7 @@ class FeedItem extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 5),
-                  const Text(
-                      'aaaaazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
+                  Text('${feed.content}')
                 ],
               ),
             )
